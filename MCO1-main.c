@@ -10,6 +10,11 @@ typedef struct Node {
     struct Node *next;
 } Node;
 
+void push(Node** head, char value);
+char pop(Node** head);
+bool stackEmpty(Node *head);
+char top(Node **head);
+
 void push(Node** head, char value) {
     Node* new_node = (Node*)malloc(sizeof(Node));
     new_node->data = value;
@@ -28,12 +33,40 @@ void push(Node** head, char value) {
 	}
 }
 
+char pop(Node** head) {
+    char result;
+    if(stackEmpty(*head))
+         result = '\0';
+    else {
+        Node* temp = *head;
+        Node* prev = NULL;
+
+        while (temp->next!= NULL) {
+            prev = temp;
+            temp = temp->next;
+        }
+        result = temp->data;
+
+        if (prev == NULL) {
+                *head = NULL;
+            } else {
+                prev->next = NULL;
+            }
+        free(temp);
+    }
+    return result;
+}
+
 bool stackEmpty(Node *head) {
     return head == NULL;
 }
 
-char top(Node *head) {
-	return head->data;
+char top(Node **head) {
+    Node* temp = *head;
+    while (temp->next != NULL) {
+        temp = temp->next;
+    }
+    return temp->data;
 }
 
 int main(){
