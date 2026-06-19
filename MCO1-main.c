@@ -2,24 +2,34 @@
 #include <stdbool.h>
 #include <string.h>
 
-bool stackEmpty(int top) {
-    bool result;
-    if(top >= 0)
-        result = false;
-    else
-        result = true;
+#define MAX 256
 
-    return result;
+// bool stackEmpty(int top) {
+//     bool result;
+//     if(top >= 0)
+//         result = false;
+//     else
+//         result = true;
+
+//     return result;
+// }
+
+// bool stackFull(int top) {
+//     bool result;
+//     if(top == MAX - 1)
+//         result = true;
+//     else
+//         result = false;
+
+//     return result;
+// }
+
+bool stackEmpty(int size) {
+    return size == 0;
 }
 
-bool stackFull(int top) {
-    bool result;
-    if(top == MAX - 1)
-        result = true;
-    else
-        result = false;
-
-    return result;
+bool stackFull(int size) {
+    return size == MAX;
 }
 
 char top(char* Infix, int size) {
