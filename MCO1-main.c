@@ -33,7 +33,7 @@ bool stackFull(int size) {
 }
 
 char top(char* Infix, int size) {
-	return Infix(size - 1);
+	return Infix[size - 1];
 }
 
 // char operatorTop(char* Infix) {
