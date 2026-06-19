@@ -22,6 +22,10 @@ bool stackFull(int top) {
     return result;
 }
 
+char top(char* Infix, int size) {
+	return Infix(size - 1);
+}
+
 // char operatorTop(char* Infix) {
 //     return ;
 // }
