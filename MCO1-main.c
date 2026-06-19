@@ -2,9 +2,19 @@
 #include <stdbool.h>
 #include <string.h>
 
-bool stackFull(int top) { //????
+bool stackEmpty(int top) {
     bool result;
-    if(top == 0)
+    if(top >= 0)
+        result = false;
+    else
+        result = true;
+
+    return result;
+}
+
+bool stackFull(int top) {
+    bool result;
+    if(top == MAX - 1)
         result = true;
     else
         result = false;
