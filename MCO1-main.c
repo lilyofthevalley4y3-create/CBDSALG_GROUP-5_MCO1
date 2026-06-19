@@ -1,44 +1,9 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
+#include <stdlib.h> //used for malloc
 
 #define MAX 256
-
-bool stackEmpty(int size) {
-    return size == 0;
-}
-
-bool stackFull(int size) {
-    return size == MAX;
-}
-
-char top(char* Infix, int size) {
-	return Infix[size - 1];
-}
-
-void push(char* Infix, char* input){
-	int size = strlen(Infix);
-	strcat(Infix, input);
-	size++;
-	printf("%s", Infix);
-}
-
-
-int main(){
-	char Infix[256]; //string array with 256 chars
-	int top = -1; // stack empty
-
-
-	printf("Input: ");
-
-	//stores the inputted infix in the array
-	//fgets(Infix, sizeof(Infix), stdin);
-	scanf("%[^\n]", Infix);
-	char input[] = "-"; //test
-	push(Infix, input);
-
-}
-
 
 // bool stackEmpty(int top) {
 //     bool result;
@@ -60,6 +25,41 @@ int main(){
 //     return result;
 // }
 
+typedef struct Node {
+    char data;    
+    struct Node *next; 
+} Node;
+
+void push(Node** head, char value) {
+    Node* new_node = (Node*)malloc(sizeof(Node));
+    new_node->data = value; 
+    new_node->next = NULL; 
+
+    //if the list is empty, the new node becomes the head
+    if (*head == NULL) {
+        *head = new_node;
+
+    }else{ //otherwise, travel to the last node and link it there
+    Node* temp = *head;
+    while (temp->next != NULL) {
+        temp = temp->next;
+    }
+    temp->next = new_node; //sets new node as the tail
+	}
+}
+
+bool stackEmpty(int size) {
+    return size == 0;
+}
+
+bool stackFull(int size) {
+    return size == MAX;
+}
+
+char top(char* Infix, int size) {
+	return Infix[size - 1];
+}
+
 // char operatorTop(char* Infix) {
 //     return ;
 // }
@@ -67,3 +67,37 @@ int main(){
 // int operandTop() {
 //     return ;
 // }
+
+int main(){
+	int i, size; 
+	char Infix[256]; //stores the infix expression
+	Node* head = NULL; //initializes head as NULL, since the list is initially empty
+	
+	//lets user input and stores the input in the Infix array
+	printf("Input an infix expression: ");
+	scanf("%255[^\n]", Infix);
+	
+	size = strlen(Infix); //gets the size of the array
+	
+	for(i = 0; i < size; i++){
+		push(&head, Infix[i]); //stores the values of the infix expression in the linked list
+	}
+	
+	//print the linked list
+	printf("Linked List: ");
+    Node* temp = head;
+    while (temp != NULL) {
+        printf("%c ", temp->data);
+        temp = temp->next;
+    }
+    printf("\n");
+
+    temp = head;
+    while (temp != NULL) {
+        Node* next_node = temp->next;
+        free(temp); //hides the value 
+        temp = next_node;
+    }
+
+	return 0;
+}
