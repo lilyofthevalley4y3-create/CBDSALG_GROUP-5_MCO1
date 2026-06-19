@@ -28,21 +28,17 @@ void push(Node** head, char value) {
 	}
 }
 
-bool stackEmpty(int size) {
-    return size == 0;
+bool stackEmpty(Node *head) {
+    return head == NULL;
 }
 
-bool stackFull(int size) {
-    return size == MAX;
-}
-
-char top(char* Infix, int size) {
-	return Infix[size - 1];
+char top(Node *head) {
+	return head->data;
 }
 
 int main(){
 	int i, size;
-	char Infix[256]; //stores the infix expression
+	char Infix[MAX]; //stores the infix expression
 	Node* head = NULL; //initializes head as NULL, since the list is initially empty
 
 	//lets user input and stores the input in the Infix array
