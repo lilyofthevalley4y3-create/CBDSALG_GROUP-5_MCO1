@@ -69,6 +69,25 @@ char top(Node **head) {
     return temp->data;
 }
 
+int precedence(char op[]) {
+    int result = -1;
+    if(strcmp(op, "||") == 0)
+        result = 1;
+    if(strcmp(op, "&&") == 0)
+        result = 2;
+    if(strcmp(op, "==") == 0 || strcmp(op, "!=") == 0)
+        result = 3;
+    if(strcmp(op, "<") == 0 || strcmp(op, ">") == 0 || strcmp(op, "<=") == 0 || strcmp(op, ">=") == 0)
+        result = 4;
+    if(strcmp(op, "+") == 0 || strcmp(op, "-") == 0)
+        result = 5;
+    if(strcmp(op, "*") == 0 || strcmp(op, "/") == 0 || strcmp(op, "%") == 0)
+        result = 6;
+    if(strcmp(op, "^") == 0)
+        result = 7;
+    return result;
+}
+
 int main(){
 	int i, size;
 	char Infix[MAX]; //stores the infix expression
@@ -83,7 +102,16 @@ int main(){
             size = strlen(Infix); //gets the size of the array
 
            	for(i = 0; i < size; i++){
-           		push(&head, Infix[i]); //stores the values of the infix expression in the linked list
+                if(Infix[i] >= '0' && Infix[i] <= '9')
+                    // append operand to postfix
+                else if(Infix[i] == '(')
+                    push(&head, Infix[i]); //stores the values of the infix expression in the linked list
+                else if(Infix[i] == ')')
+                    pop(&head);
+                else {
+                    // operator
+                }
+
            	}
 
            	//print the linked list
@@ -101,7 +129,7 @@ int main(){
                 free(temp); //hides the value
                 temp = next_node;
             }
-        }
+        } else running = -1;
 	}
 
 	return 0;
