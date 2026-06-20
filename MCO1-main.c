@@ -73,32 +73,36 @@ int main(){
 	int i, size;
 	char Infix[MAX]; //stores the infix expression
 	Node* head = NULL; //initializes head as NULL, since the list is initially empty
+	int running = 1;
 
-	//lets user input and stores the input in the Infix array
-	printf("Input an infix expression: ");
-	scanf("%255[^\n]", Infix);
+	while(running == 1) {
+    	//lets user input and stores the input in the Infix array
+    	// printf("Input an infix expression: ");
+    	scanf("%255[^\n]", Infix);
+        if(strcmp("QUIT", Infix) != 0) {
+            size = strlen(Infix); //gets the size of the array
 
-	size = strlen(Infix); //gets the size of the array
+           	for(i = 0; i < size; i++){
+           		push(&head, Infix[i]); //stores the values of the infix expression in the linked list
+           	}
 
-	for(i = 0; i < size; i++){
-		push(&head, Infix[i]); //stores the values of the infix expression in the linked list
+           	//print the linked list
+           	printf("Linked List: ");
+            Node* temp = head;
+            while (temp != NULL) {
+                printf("%c ", temp->data);
+                temp = temp->next;
+            }
+            printf("\n");
+
+            temp = head;
+            while (temp != NULL) {
+                Node* next_node = temp->next;
+                free(temp); //hides the value
+                temp = next_node;
+            }
+        }
 	}
-
-	//print the linked list
-	printf("Linked List: ");
-    Node* temp = head;
-    while (temp != NULL) {
-        printf("%c ", temp->data);
-        temp = temp->next;
-    }
-    printf("\n");
-
-    temp = head;
-    while (temp != NULL) {
-        Node* next_node = temp->next;
-        free(temp); //hides the value
-        temp = next_node;
-    }
 
 	return 0;
 }
