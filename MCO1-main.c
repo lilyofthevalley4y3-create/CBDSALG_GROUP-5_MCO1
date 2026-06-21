@@ -10,12 +10,6 @@ typedef struct Node {
     struct Node *next;
 } Node;
 
-//for operarand stack in evaluate post
-typedef struct NumNode{
-	int data; //stores numbers only
-	struct NumNode *next;
-} NumNode; 
-
 typedef struct {
 	Node *head;
 	Node *tail;
@@ -34,7 +28,7 @@ int evaluatePost(Queue* postQueue);
 // HELPER FUNCTIONS
 bool isOperand(char ch);
 void appendToken(char* postfix, char* token);
-void inQueue(Queue *q);
+void initQueue(Queue *q);
 bool isQueueEmpty(Queue *q);
 bool stackEmpty(Node *head);
 
@@ -148,7 +142,6 @@ char* top(Node **head) {
     return temp->data;
 }
 
-//halos same lang ng nsa github :P
 int precedence(char ch[]){
 	if(strcmp(ch, "!") == 0){
 		return 8;
