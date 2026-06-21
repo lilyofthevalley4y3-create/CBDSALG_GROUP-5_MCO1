@@ -14,7 +14,7 @@ typedef struct Node {
 typedef struct NumNode{
 	int data; //stores numbers only
 	struct NumNode *next;
-} NumNode; 
+} NumNode;
 
 typedef struct {
 	Node *head;
@@ -46,6 +46,10 @@ bool isOperand(char ch){
 	return false;
 }
 
+void initStack(Node *head) {
+    head->data = 'NULL';
+}
+
 void initQueue(Queue *q){
 	q->head = NULL;
 	q->tail = NULL;
@@ -61,7 +65,7 @@ bool isQueueEmpty(Queue *q){
 //helper function for appending postfix
 void appendToken(char* postfix, char* token){
 	if(strlen(postfix) > 0){
-		strcat(postfix, " "); 
+		strcat(postfix, " ");
 	}
 	strcat(postfix, token);
 }
@@ -70,13 +74,13 @@ void enqueue(Queue *q, char token[]){
 	Node* new_node = (Node*)malloc(sizeof(Node));
 	strcpy(new_node->data, token);
 	new_node->next = NULL;
-	
+
 	//if queue is empty, head and tail become the only node
 	if(q->tail == NULL){
 		q->head = new_node;
 		q->tail = new_node;
 	} else {
-		q->tail->next = new_node; 
+		q->tail->next = new_node;
 		q->tail = new_node; //moves tail to newest node
 	}
 }
@@ -88,7 +92,7 @@ void dequeue(Queue *q, char result[]){
 		Node* temp = q->head;
 		strcpy(result, temp->data);
 		q->head = q->head->next;
-		
+
 		if(q->head == NULL){
 			q->tail = NULL;
 		}
@@ -184,14 +188,14 @@ void infixToPost(Node* head, Queue* postQueue, char* postfix){
 	char multiToken[MAX] = ""; //current digits for operands only
 	char popped[4]; //popped digits
 	char curr, next; //for multi-char operands
-	
+
 	while(head != NULL){
 		if(head->data[0] == ' ' || head->data[0] == '\t'){ //skip spaces
 			head = head->next;
 		}
 		else{
 			token[0] = '\0';
-			
+
 			//looks for multi-digit operands
 			if(isOperand(head->data[0])){
 				i = 0; //reset idx back to 0 for every number (NOT DIGIT)
@@ -206,7 +210,7 @@ void infixToPost(Node* head, Queue* postQueue, char* postfix){
 			} else {
 				//looks for multi-character operators
 				if(head->next != NULL){
-					curr = head->data[0]; 
+					curr = head->data[0];
 					next = head->next->data[0];
 					if((curr == '>' && next == '=') || (curr == '<' && next == '=') || (curr == '!' && next == '=')
 					|| (curr == '=' && next == '=') || (curr == '&' && next == '&') || (curr == '|' && next == '|')){
@@ -222,7 +226,7 @@ void infixToPost(Node* head, Queue* postQueue, char* postfix){
 					token[1] = '\0';
 					head = head->next;
 				}
-				
+
 				//parenthesis-check
 				if(strcmp(token, "(") == 0){
 					push(&stack, token);
@@ -237,7 +241,7 @@ void infixToPost(Node* head, Queue* postQueue, char* postfix){
 					//regular operations and operands
 					while(!stackEmpty(stack) && strcmp(top(&stack), "(") != 0 &&
 					((strcmp(token, "^") != 0 && precedence(token) <= precedence(top(&stack))) ||
-					(strcmp(token, "^") == 0 && precedence(token) < precedence(top(&stack))))){ 
+					(strcmp(token, "^") == 0 && precedence(token) < precedence(top(&stack))))){
 						pop(&stack, popped);
 	                    enqueue(postQueue, popped);
 	                    appendToken(postfix, popped);
@@ -247,7 +251,7 @@ void infixToPost(Node* head, Queue* postQueue, char* postfix){
 				}
 			}
 		}
-	
+
 	//final popping
 	while(!stackEmpty(stack)){
 		pop(&stack, popped);
@@ -257,7 +261,22 @@ void infixToPost(Node* head, Queue* postQueue, char* postfix){
 }
 
 int evaluatePost(Queue* postQueue){
-	
+    NumNode *stack = NULL;
+
+    int first, second;
+
+    while(postQueue->head != NULL) {
+        Node *current = postQueue->head;
+        if(isOperand(current->data[0]))
+            push(&stack, atoi(current->data));
+        else {
+            second = pop(&stack, atoi(current->data));
+            first = pop(&stack, atoi(current->data));
+            switch(current->data) {
+
+            }
+        }
+    }
 }
 
 int main(){
@@ -270,23 +289,23 @@ int main(){
 
 	while(running == 1){
 		initQueue(&postQueue); //initiliazes queue for tokens
-		
+
 		//lets user input and stores the input in the Infix array
 		printf("Welcome U S E R! \n");
 		printf("Type QUIT to END\n");
 		printf("Input an infix expression: ");
 		scanf("%s", Infix);
-		
+
 		if(strcmp("QUIT", Infix) != 0){
 			running = 1;
 			size = strlen(Infix); //gets the size of the array
-	
+
 			for(i = 0; i < size; i++){
 				tempStr[0] = Infix[i];
 				tempStr[1] = '\0'; //prevents overload
 				push(&head, tempStr); //stores the values of the infix expression in the linked list
 			}
-		
+
 			//print the linked list
 			printf("Linked List: ");
 		    Node* temp = head;
@@ -295,54 +314,26 @@ int main(){
 		        temp = temp->next;
 		    }
 		    printf("\n");
-			
+
 			Postfix[0] = '\0'; //initializes and resets the Postfix expression
 			infixToPost(head, &postQueue, Postfix);
-			
+
 			//print the postfix
 			printf("Postfix: %s", Postfix);
 			printf("\n\n");
-			
+
 		    temp = head;
 		    while (temp != NULL) {
 		        Node* next_node = temp->next;
 		        free(temp); //hides the value
 		        temp = next_node;
 	    		}
-	    	
-			head = NULL; //resets the position of the head	
-	    	
+
+			head = NULL; //resets the position of the head
+
 			} else running = -1;
 		//initializer here
 	}
 
 	return 0;
 }
-
-// bool stackEmpty(int top) {
-//     bool result;
-//     if(top >= 0)
-//         result = false;
-//     else
-//         result = true;
-
-//     return result;
-// }
-
-// bool stackFull(int top) {
-//     bool result;
-//     if(top == MAX - 1)
-//         result = true;
-//     else
-//         result = false;
-
-//     return result;
-// }
-
-// char operatorTop(char* Infix) {
-//     return ;
-// }
-
-// int operandTop() {
-//     return ;
-// }
