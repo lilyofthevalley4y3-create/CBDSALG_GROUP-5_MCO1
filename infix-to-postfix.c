@@ -1,4 +1,4 @@
-void infixToPost(Node* head, TokenQueue* postQueue, char* postfix){
+void infixToPost(Node* head, Queue* postQueue, char* postfix){
 	Node *stack = NULL;
 	int i = 0;
 	char token[4]; //current digit for both operand and operator
