@@ -269,40 +269,99 @@ int evaluatePost(Queue* postQueue){
 
         Node *current = postQueue->head; //current node is the head of postQueue
 
-		
+
         if(isOperand(current->data[0])){ //if the value is an operand, push to the stack
-            push(&stack, current->data); 
+            push(&stack, current->data);
         }
         else{
-        	//if an operator is found, pop the first and second operands from the stack and store them in an array
-            pop(&stack, secondop); 
-            pop(&stack, firstop);
+            if(strcmp("!", current->data) == 0) {
+                pop(&stack, firstop);
+                first = atoi(firstop);
 
-            first = atoi(firstop);
-            second = atoi(secondop);
+                answer = !first;
+            } else if(strcmp("==", current->data) == 0) {
+                pop(&stack, firstop);
+                pop(&stack, secondop);
+                first = atoi(firstop);
+                second = atoi(secondop);
 
-            switch(current->data[0]){
-                case '+':
-                    answer = first + second;
-                    break;
-                case '-':
-                    answer = first - second;
-                    break;
-                case '*':
-                    answer = first * second;
-                    break;
-                case '/':
-                    answer = first / second;
-                    break;
+                answer = (first == second);
+            } else if(strcmp("!=", current->data) == 0) {
+                pop(&stack, firstop);
+                pop(&stack, secondop);
+                first = atoi(firstop);
+                second = atoi(secondop);
+
+                answer = (first != second);
+            } else if(strcmp(">=", current->data) == 0) {
+                pop(&stack, firstop);
+                pop(&stack, secondop);
+                first = atoi(firstop);
+                second = atoi(secondop);
+
+                answer = (first >= second);
+            } else if(strcmp("<=", current->data) == 0) {
+                pop(&stack, firstop);
+                pop(&stack, secondop);
+                first = atoi(firstop);
+                second = atoi(secondop);
+
+                answer = (first <= second);
+            } else if(strcmp(">", current->data) == 0) {
+                pop(&stack, firstop);
+                pop(&stack, secondop);
+                first = atoi(firstop);
+                second = atoi(secondop);
+
+                answer = (first > second);
+            } else if(strcmp("<", current->data) == 0) {
+                pop(&stack, firstop);
+                pop(&stack, secondop);
+                first = atoi(firstop);
+                second = atoi(secondop);
+
+                answer = (first < second);
+            } else if(strcmp("&&", current->data) == 0) {
+                pop(&stack, firstop);
+                pop(&stack, secondop);
+                first = atoi(firstop);
+                second = atoi(secondop);
+
+                answer = (first && second);
+            } else if(strcmp("||", current->data) == 0) {
+                pop(&stack, firstop);
+                pop(&stack, secondop);
+                first = atoi(firstop);
+                second = atoi(secondop);
+
+                answer = (first || second);
+            } else {
+                //if an operator is found, pop the first and second operands from the stack and store them in an array
+                pop(&stack, firstop);
+                pop(&stack, secondop);
+
+                first = atoi(firstop);
+                second = atoi(secondop);
+
+                switch(current->data[0]){
+                    case '+':
+                        answer = first + second;
+                        break;
+                    case '-':
+                        answer = first - second;
+                        break;
+                    case '*':
+                        answer = first * second;
+                        break;
+                    case '/':
+                        answer = first / second;
+                        break;
+                }
             }
-
-            sprintf(temp, "%d", answer); //converts answer to string then stores in a temporary array to be used again later
-            push(&stack, temp); //push the answer back to the stack 
         }
-
-       
+        sprintf(temp, "%d", answer); //converts answer to string then stores in a temporary array to be used again later
+        push(&stack, temp); //push the answer back to the stack
     }
-
 
     return atoi(result);
 }
@@ -314,7 +373,7 @@ int main(){
 	char Postfix[MAX];
 	Node* head = NULL; //initializes head as NULL, since the list is initially empty
 	Queue postQueue;
-	int result; 
+	int result;
 	while(running == 1){
 		initQueue(&postQueue); //initiliazes queue for tokens
 
@@ -349,7 +408,7 @@ int main(){
 			//print the postfix
 			printf("Postfix: %s", Postfix);
 			printf("\n\n");
-			
+
 			result = evaluatePost(&postQueue);
 			printf("Evaluation: %d\n", result);
 		    temp = head;
