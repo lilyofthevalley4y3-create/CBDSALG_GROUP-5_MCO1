@@ -46,9 +46,6 @@ bool isOperand(char ch){
 	return false;
 }
 
-void initStack(Node *head) {
-    head->data = 'NULL';
-}
 
 void initQueue(Queue *q){
 	q->head = NULL;
@@ -259,24 +256,55 @@ void infixToPost(Node* head, Queue* postQueue, char* postfix){
 		appendToken(postfix, popped);
 	}
 }
-
 int evaluatePost(Queue* postQueue){
-    NumNode *stack = NULL;
+    Node *stack = NULL;
 
-    int first, second;
+    char temp[4];
+    char result[4];
+	char firstop[4], secondop[4]; //stores the operands
+	char first, second;
+    int answer;
 
-    while(postQueue->head != NULL) {
-        Node *current = postQueue->head;
-        if(isOperand(current->data[0]))
-            push(&stack, atoi(current->data));
-        else {
-            second = pop(&stack, atoi(current->data));
-            first = pop(&stack, atoi(current->data));
-            switch(current->data) {
+    while(postQueue->head != NULL){
 
-            }
+        Node *current = postQueue->head; //current node is the head of postQueue
+
+		
+        if(isOperand(current->data[0])){ //if the value is an operand, push to the stack
+            push(&stack, current->data); 
         }
+        else{
+        	//if an operator is found, pop the first and second operands from the stack and store them in an array
+            pop(&stack, secondop); 
+            pop(&stack, firstop);
+
+            first = atoi(firstop);
+            second = atoi(secondop);
+
+            switch(current->data[0]){
+                case '+':
+                    answer = first + second;
+                    break;
+                case '-':
+                    answer = first - second;
+                    break;
+                case '*':
+                    answer = first * second;
+                    break;
+                case '/':
+                    answer = first / second;
+                    break;
+            }
+
+            sprintf(temp, "%d", answer); //converts answer to string then stores in a temporary array to be used again later
+            push(&stack, temp); //push the answer back to the stack 
+        }
+
+       
     }
+
+
+    return atoi(result);
 }
 
 int main(){
@@ -286,7 +314,7 @@ int main(){
 	char Postfix[MAX];
 	Node* head = NULL; //initializes head as NULL, since the list is initially empty
 	Queue postQueue;
-
+	int result; 
 	while(running == 1){
 		initQueue(&postQueue); //initiliazes queue for tokens
 
@@ -321,7 +349,9 @@ int main(){
 			//print the postfix
 			printf("Postfix: %s", Postfix);
 			printf("\n\n");
-
+			
+			result = evaluatePost(&postQueue);
+			printf("Evaluation: %d\n", result);
 		    temp = head;
 		    while (temp != NULL) {
 		        Node* next_node = temp->next;
