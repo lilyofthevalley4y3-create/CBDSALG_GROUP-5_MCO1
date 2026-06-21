@@ -256,9 +256,9 @@ void infixToPost(Node* head, Queue* postQueue, char* postfix){
 		appendToken(postfix, popped);
 	}
 }
+
 int evaluatePost(Queue* postQueue){
     Node *stack = NULL;
-
     char temp[4];
     char result[4];
 	char firstop[4], secondop[4]; //stores the operands
