@@ -10,6 +10,12 @@ typedef struct Node {
     struct Node *next;
 } Node;
 
+//for operarand stack in evaluate post
+typedef struct NumNode{
+	int data; //stores numbers only
+	struct NumNode *next;
+} NumNode; 
+
 typedef struct {
 	Node *head;
 	Node *tail;
@@ -28,7 +34,7 @@ int evaluatePost(Queue* postQueue);
 // HELPER FUNCTIONS
 bool isOperand(char ch);
 void appendToken(char* postfix, char* token);
-void initQueue(Queue *q);
+void inQueue(Queue *q);
 bool isQueueEmpty(Queue *q);
 bool stackEmpty(Node *head);
 
@@ -142,6 +148,7 @@ char* top(Node **head) {
     return temp->data;
 }
 
+//halos same lang ng nsa github :P
 int precedence(char ch[]){
 	if(strcmp(ch, "!") == 0){
 		return 8;
@@ -249,6 +256,10 @@ void infixToPost(Node* head, Queue* postQueue, char* postfix){
 	}
 }
 
+int evaluatePost(Queue* postQueue){
+	
+}
+
 int main(){
 	int i, size, running = 1;
 	char tempStr[2]; //temp string used for push function
@@ -264,10 +275,10 @@ int main(){
 		printf("Welcome U S E R! \n");
 		printf("Type QUIT to END\n");
 		printf("Input an infix expression: ");
-		scanf("%255[^\n]", Infix);
+		scanf("%s", Infix);
 		
 		if(strcmp("QUIT", Infix) != 0){
-
+			running = 1;
 			size = strlen(Infix); //gets the size of the array
 	
 			for(i = 0; i < size; i++){
@@ -285,6 +296,7 @@ int main(){
 		    }
 		    printf("\n");
 			
+			Postfix[0] = '\0'; //initializes and resets the Postfix expression
 			infixToPost(head, &postQueue, Postfix);
 			
 			//print the postfix
@@ -297,9 +309,11 @@ int main(){
 		        free(temp); //hides the value
 		        temp = next_node;
 	    		}
-	    		
+	    	
+			head = NULL; //resets the position of the head	
 	    	
 			} else running = -1;
+		//initializer here
 	}
 
 	return 0;
