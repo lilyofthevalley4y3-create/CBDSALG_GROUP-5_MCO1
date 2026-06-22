@@ -24,7 +24,7 @@ void pop(Node** head, char result[]);
 char* top(Node **head);
 int precedence(char ch[]);
 void infixToPost(Node* head, Queue* postQueue, char* postfix);
-int evaluatePost(Queue* postQueue);
+int evaluatePost(Queue* postQueue, int *valid);
 
 // HELPER FUNCTIONS
 bool isOperand(char ch);
@@ -247,16 +247,16 @@ void infixToPost(Node* head, Queue* postQueue, char* postfix){
 }
 
 //missing exponents and modulo, crashes when denominator is zero
-int evaluatePost(Queue* postQueue){
+int evaluatePost(Queue* postQueue, int *valid){
     Node *stack = NULL;
     char temp[4];
     char result[4];
 	char firstop[4], secondop[4]; //stores the operands
 	int first, second;
     int answer;
-    bool valid = true;
+   
 
-    while(postQueue->head != NULL && valid == true){
+    while(postQueue->head != NULL && *valid == 1){
         Node *current = postQueue->head; //current node is the head of postQueue
 
         if(isOperand(current->data[0])){ //if the value is an operand, push to the stack
@@ -351,12 +351,12 @@ int evaluatePost(Queue* postQueue){
 						if(second != 0){
 							answer = first / second;
 						} else {
-							printf("Division by zero error!\n");
 							answer = 0;
-							valid = false;
+							*valid = 0;
 						}
                 }
             }
+            
             sprintf(temp, "%d", answer); //converts answer to string then stores in a temporary array to be used again later
             push(&stack, temp); //push the answer back to the stack
         }
@@ -374,7 +374,9 @@ int main(){
 	Node* head = NULL; //initializes head as NULL, since the list is initially empty
 	Queue postQueue;
 	int result;
+	int valid; 
 	while(running == 1){
+		valid = 1;
 		initQueue(&postQueue); //initiliazes queue for tokens
 
 		//lets user input and stores the input in the Infix array
@@ -409,9 +411,14 @@ int main(){
 			printf("Postfix: %s", Postfix);
 			printf("\n\n");
 
-			result = evaluatePost(&postQueue);
+			result = evaluatePost(&postQueue, &valid);
+			
+			if(valid == 1){
 			printf("Evaluation: %d\n", result);
-
+			}
+			else if(valid != 1)
+			printf("Division by zero error!\n");
+			
 		    temp = head;
 		    while (temp != NULL) {
 		        Node* next_node = temp->next;
