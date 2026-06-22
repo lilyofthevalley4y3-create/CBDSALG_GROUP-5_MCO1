@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include <string.h>
 #include "lib.h"
-//#include "stack.c"
-//#include "queue.c"
 
 void infixToPost(Node* head, Queue* postQueue, char* postfix){
 	Node *stack = NULL;

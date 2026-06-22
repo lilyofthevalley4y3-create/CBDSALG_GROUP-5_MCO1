@@ -1,6 +1,3 @@
-//#include "helper.c"
-//#include "queue.c"
-//#include "stack.c"
 #include <stdbool.h>
 
 #define MAX 256
