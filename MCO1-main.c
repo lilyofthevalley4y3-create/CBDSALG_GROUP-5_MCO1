@@ -24,7 +24,7 @@ void pop(Node** head, char result[]);
 char* top(Node **head);
 int precedence(char ch[]);
 void infixToPost(Node* head, Queue* postQueue, char* postfix);
-int evaluatePost(Queue* postQueue, int *valid);
+int evaluatePost(Queue* postQueue, bool *valid);
 
 // HELPER FUNCTIONS
 bool isOperand(char ch);
@@ -246,7 +246,7 @@ void infixToPost(Node* head, Queue* postQueue, char* postfix){
 	}
 }
 
-int evaluatePost(Queue* postQueue, int *valid){
+int evaluatePost(Queue* postQueue, bool *valid){
     Node *stack = NULL;
     char temp[4];
     char result[4];
