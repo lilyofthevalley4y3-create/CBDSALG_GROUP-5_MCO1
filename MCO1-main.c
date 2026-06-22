@@ -254,8 +254,9 @@ int evaluatePost(Queue* postQueue){
 	char firstop[4], secondop[4]; //stores the operands
 	int first, second;
     int answer;
+    int valid = 1;
 
-    while(postQueue->head != NULL){
+    while(postQueue->head != NULL && valid == 1){
         Node *current = postQueue->head; //current node is the head of postQueue
 
         if(isOperand(current->data[0])){ //if the value is an operand, push to the stack
@@ -351,6 +352,8 @@ int evaluatePost(Queue* postQueue){
 							answer = first / second;
 						} else {
 							printf("Division by zero error!\n");
+							answer = 0;
+							valid = -1;
 						}
                 }
             }
