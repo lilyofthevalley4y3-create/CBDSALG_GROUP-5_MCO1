@@ -246,7 +246,6 @@ void infixToPost(Node* head, Queue* postQueue, char* postfix){
 	}
 }
 
-//missing exponents and modulo, crashes when denominator is zero
 int evaluatePost(Queue* postQueue, int *valid){
     Node *stack = NULL;
     char temp[4];
