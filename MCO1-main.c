@@ -182,7 +182,7 @@ void infixToPost(Node* head, Queue* postQueue, char* postfix){
 
 	while(head != NULL){
 		token[0] = '\0';
-		
+
 		//looks for multi-digit operands
 		if(isOperand(head->data[0])){
 			i = 0; //reset idx back to 0 for every number (NOT DIGIT)
@@ -340,7 +340,6 @@ int evaluatePost(Queue* postQueue){
                     case '*':
                         answer = first * second;
                         break;
-                        break;
 					case '%':
 						answer = first % second;
 						break;
@@ -351,7 +350,7 @@ int evaluatePost(Queue* postQueue){
 						if(second != 0){
 							answer = first / second;
 						} else {
-							printf("Division by zero error!");
+							printf("Division by zero error!\n");
 						}
                 }
             }
@@ -409,7 +408,7 @@ int main(){
 
 			result = evaluatePost(&postQueue);
 			printf("Evaluation: %d\n", result);
-			
+
 		    temp = head;
 		    while (temp != NULL) {
 		        Node* next_node = temp->next;
