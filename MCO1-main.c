@@ -357,7 +357,7 @@ int evaluatePost(Queue* postQueue){
             sprintf(temp, "%d", answer); //converts answer to string then stores in a temporary array to be used again later
             push(&stack, temp); //push the answer back to the stack
         }
-        postQueue->head = postQueue->head->next;
+        dequeue(postQueue, result);
     }
     pop(&stack, result);
     return atoi(result);
