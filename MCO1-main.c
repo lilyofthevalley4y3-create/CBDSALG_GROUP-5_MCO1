@@ -254,7 +254,7 @@ int evaluatePost(Queue* postQueue, int *valid){
 	char firstop[4], secondop[4]; //stores the operands
 	int first, second;
     int answer;
-   
+
 
     while(postQueue->head != NULL && *valid == 1){
         Node *current = postQueue->head; //current node is the head of postQueue
@@ -352,11 +352,11 @@ int evaluatePost(Queue* postQueue, int *valid){
 							answer = first / second;
 						} else {
 							answer = 0;
-							*valid = 0;
+							*valid = false;
 						}
                 }
             }
-            
+
             sprintf(temp, "%d", answer); //converts answer to string then stores in a temporary array to be used again later
             push(&stack, temp); //push the answer back to the stack
         }
@@ -374,9 +374,10 @@ int main(){
 	Node* head = NULL; //initializes head as NULL, since the list is initially empty
 	Queue postQueue;
 	int result;
-	int valid; 
+	bool valid;
+
 	while(running == 1){
-		valid = 1;
+		valid = true;
 		initQueue(&postQueue); //initiliazes queue for tokens
 
 		//lets user input and stores the input in the Infix array
@@ -412,13 +413,13 @@ int main(){
 			printf("\n\n");
 
 			result = evaluatePost(&postQueue, &valid);
-			
+
 			if(valid == 1){
 			printf("Evaluation: %d\n", result);
 			}
 			else if(valid != 1)
 			printf("Division by zero error!\n");
-			
+
 		    temp = head;
 		    while (temp != NULL) {
 		        Node* next_node = temp->next;
