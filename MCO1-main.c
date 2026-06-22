@@ -2,6 +2,7 @@
 #include <stdbool.h>
 #include <string.h>
 #include <stdlib.h> //used for malloc
+#include <math.h> //used for pow()
 
 #define MAX 256
 
@@ -9,12 +10,6 @@ typedef struct Node {
     char data[4]; //stores multi-digit values
     struct Node *next;
 } Node;
-
-//for operarand stack in evaluate post
-typedef struct NumNode{
-	int data; //stores numbers only
-	struct NumNode *next;
-} NumNode;
 
 typedef struct {
 	Node *head;
@@ -149,7 +144,6 @@ char* top(Node **head) {
     return temp->data;
 }
 
-//halos same lang ng nsa github :P
 int precedence(char ch[]){
 	if(strcmp(ch, "!") == 0){
 		return 8;
@@ -187,64 +181,59 @@ void infixToPost(Node* head, Queue* postQueue, char* postfix){
 	char curr, next; //for multi-char operands
 
 	while(head != NULL){
-		if(head->data[0] == ' ' || head->data[0] == '\t'){ //skip spaces
-			head = head->next;
-		}
-		else{
-			token[0] = '\0';
-
-			//looks for multi-digit operands
-			if(isOperand(head->data[0])){
-				i = 0; //reset idx back to 0 for every number (NOT DIGIT)
-				while(head != NULL && isOperand(head->data[0])){
-					multiToken[i] = head->data[0];
-					head = head->next;
-					i++;
+		token[0] = '\0';
+		
+		//looks for multi-digit operands
+		if(isOperand(head->data[0])){
+			i = 0; //reset idx back to 0 for every number (NOT DIGIT)
+			while(head != NULL && isOperand(head->data[0])){
+				multiToken[i] = head->data[0];
+				head = head->next;
+				i++;
+			}
+			multiToken[i] = '\0'; //closes current multiToken
+			enqueue(postQueue, multiToken);
+			appendToken(postfix, multiToken);
+		} else {
+			//looks for multi-character operators
+			if(head->next != NULL){
+				curr = head->data[0];
+				next = head->next->data[0];
+				if((curr == '>' && next == '=') || (curr == '<' && next == '=') || (curr == '!' && next == '=')
+				|| (curr == '=' && next == '=') || (curr == '&' && next == '&') || (curr == '|' && next == '|')){
+					token[0] = curr;
+					token[1] = next;
+					token[2] = '\0';
+					head = head->next->next;
 				}
-				multiToken[i] = '\0'; //closes current multiToken
-				enqueue(postQueue, multiToken);
-				appendToken(postfix, multiToken);
+			}
+			//if single-character operator
+			if(token[0] == '\0'){
+				token[0] = head->data[0];
+				token[1] = '\0';
+				head = head->next;
+			}
+
+			//parenthesis-check
+			if(strcmp(token, "(") == 0){
+				push(&stack, token);
+			} else if(strcmp(token, ")") == 0){
+				while(!stackEmpty(stack) && strcmp(top(&stack), "(") != 0){
+					pop(&stack, popped);
+					enqueue(postQueue, popped);
+					appendToken(postfix, popped);
+				}
+				pop(&stack,popped); // REMOVES "("
 			} else {
-				//looks for multi-character operators
-				if(head->next != NULL){
-					curr = head->data[0];
-					next = head->next->data[0];
-					if((curr == '>' && next == '=') || (curr == '<' && next == '=') || (curr == '!' && next == '=')
-					|| (curr == '=' && next == '=') || (curr == '&' && next == '&') || (curr == '|' && next == '|')){
-						token[0] = curr;
-						token[1] = next;
-						token[2] = '\0';
-						head = head->next->next;
-					}
-				}
-				//if single-character operator
-				if(token[0] == '\0'){
-					token[0] = head->data[0];
-					token[1] = '\0';
-					head = head->next;
-				}
-
-				//parenthesis-check
-				if(strcmp(token, "(") == 0){
-					push(&stack, token);
-				} else if(strcmp(token, ")") == 0){
-					while(!stackEmpty(stack) && strcmp(top(&stack), "(") != 0){
-						pop(&stack, popped);
-						enqueue(postQueue, popped);
-						appendToken(postfix, popped);
-					}
-					pop(&stack,popped); // REMOVES "("
-				} else {
-					//regular operations and operands
-					while(!stackEmpty(stack) && strcmp(top(&stack), "(") != 0 &&
-					((strcmp(token, "^") != 0 && precedence(token) <= precedence(top(&stack))) ||
-					(strcmp(token, "^") == 0 && precedence(token) < precedence(top(&stack))))){
-						pop(&stack, popped);
-	                    enqueue(postQueue, popped);
-	                    appendToken(postfix, popped);
-                    }
-                    push(&stack, token);
-					}
+				//regular operations and operands
+				while(!stackEmpty(stack) && strcmp(top(&stack), "(") != 0 &&
+				((strcmp(token, "^") != 0 && precedence(token) <= precedence(top(&stack))) ||
+				(strcmp(token, "^") == 0 && precedence(token) < precedence(top(&stack))))){
+					pop(&stack, popped);
+                    enqueue(postQueue, popped);
+                    appendToken(postfix, popped);
+                   }
+                   push(&stack, token);
 				}
 			}
 		}
@@ -257,6 +246,7 @@ void infixToPost(Node* head, Queue* postQueue, char* postfix){
 	}
 }
 
+//missing exponents and modulo, crashes when denominator is zero
 int evaluatePost(Queue* postQueue){
     Node *stack = NULL;
     char temp[4];
@@ -350,9 +340,19 @@ int evaluatePost(Queue* postQueue){
                     case '*':
                         answer = first * second;
                         break;
-                    case '/':
-                        answer = first / second;
                         break;
+					case '%':
+						answer = first % second;
+						break;
+					case '^':
+						answer = pow(first, second);
+						break;
+					case '/':
+						if(second != 0){
+							answer = first / second;
+						} else {
+							printf("Division by zero error!");
+						}
                 }
             }
             sprintf(temp, "%d", answer); //converts answer to string then stores in a temporary array to be used again later
@@ -409,6 +409,7 @@ int main(){
 
 			result = evaluatePost(&postQueue);
 			printf("Evaluation: %d\n", result);
+			
 		    temp = head;
 		    while (temp != NULL) {
 		        Node* next_node = temp->next;
