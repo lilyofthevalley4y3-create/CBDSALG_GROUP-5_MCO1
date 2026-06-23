@@ -43,17 +43,17 @@ int precedence(char ch[]){
 	if(strcmp(ch, "+") == 0 || strcmp(ch, "-") == 0){
 		return 5;
 	}
-	if(strcmp(ch, "<") == 0 || strcmp(ch, "<=") == 0 || strcmp(ch, ">") == 0 || strcmp(ch, ">=") == 0){
-		return 4;
-	}
-	if(strcmp(ch, "==") == 0 || strcmp(ch, "!=") == 0){
-		return 3;
-	}
-	if(strcmp(ch, "&&") == 0){
-		return 2;
-	}
-	if(strcmp(ch, "||") == 0){
-		return 1;
-	}
+	// if(strcmp(ch, "<") == 0 || strcmp(ch, "<=") == 0 || strcmp(ch, ">") == 0 || strcmp(ch, ">=") == 0){
+	// 	return 4;
+	// }
+	// if(strcmp(ch, "==") == 0 || strcmp(ch, "!=") == 0){
+	// 	return 3;
+	// }
+	// if(strcmp(ch, "&&") == 0){
+	// 	return 2;
+	// }
+	// if(strcmp(ch, "||") == 0){
+	// 	return 1;
+	// }
 	return -1;
 }
