@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h> //used for malloc
-#include "lib.h"
+#include <stdbool.h>
+#include "queue.h"
 
 void enqueue(Queue *q, char token[]){
 	Node* new_node = (Node*)malloc(sizeof(Node));
@@ -31,4 +32,16 @@ void dequeue(Queue *q, char result[]){
 		}
 		free(temp);
 	}
+}
+
+void initQueue(Queue *q){
+	q->head = NULL;
+	q->tail = NULL;
+}
+
+bool isQueueEmpty(Queue *q){
+	if (q->head == NULL){
+		return true;
+	}
+	return false;
 }

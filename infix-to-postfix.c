@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <string.h>
-#include "lib.h"
+#include <stdbool.h>
+#include "stack.h"
+#include "queue.h"
+#include "helper.h"
 
 void infixToPost(Node* head, Queue* postQueue, char* postfix){
 	Node *stack = NULL;
@@ -58,10 +61,10 @@ void infixToPost(Node* head, Queue* postQueue, char* postfix){
 				//regular operations and operands
 				rightassociative = (strcmp(token, "!") == 0); //"!" is right to left associative
 				while (!stackEmpty(stack) && strcmp(top(&stack), "(") != 0 && (( !rightassociative && precedence(token) <= precedence(top(&stack))) // For left-associative operators (+, -, *, /, %),pop operators with greater or equal precedence
-			        ||( rightassociative && precedence(token) < precedence(top(&stack))))){  // For right-associative operators (!), pop operators with greater precedence only 
-					    pop(&stack, popped); 
-					    enqueue(postQueue, popped); 
-					    appendToken(postfix, popped); 
+			        ||( rightassociative && precedence(token) < precedence(top(&stack))))){  // For right-associative operators (!), pop operators with greater precedence only
+					    pop(&stack, popped);
+					    enqueue(postQueue, popped);
+					    appendToken(postfix, popped);
 					}
                 push(&stack, token);
 			}

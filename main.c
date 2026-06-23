@@ -2,7 +2,10 @@
 #include <stdbool.h>
 #include <string.h>
 #include <stdlib.h> //used for malloc
-#include "lib.h"
+#include "infix-to-postfix.h"
+#include "evaluate-postfix.h"
+#include "stack.h"
+#include "queue.h"
 
 int main(){
 	int i, size, running = 1;

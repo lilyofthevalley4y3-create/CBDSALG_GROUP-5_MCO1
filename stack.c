@@ -2,7 +2,7 @@
 #include <stdbool.h>
 #include <string.h>
 #include <stdlib.h> //used for malloc
-#include "lib.h"
+#include "stack.h"
 
 void push(Node** head, char value[]) {
     Node* new_node = (Node*)malloc(sizeof(Node));

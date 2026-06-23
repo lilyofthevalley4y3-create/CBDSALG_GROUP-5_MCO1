@@ -3,7 +3,9 @@
 #include <string.h>
 #include <stdlib.h> //used for malloc
 #include <math.h> //used for pow()
-#include "lib.h"
+#include "queue.h"
+#include "stack.h"
+#include "helper.h"
 
 int evaluatePost(Queue* postQueue, bool *valid){
     Node *stack = NULL;

@@ -1,18 +1,6 @@
 #include <stdbool.h>
 #include <string.h>
-#include "lib.h"
-
-void initQueue(Queue *q){
-	q->head = NULL;
-	q->tail = NULL;
-}
-
-bool isQueueEmpty(Queue *q){
-	if (q->head == NULL){
-		return true;
-	}
-	return false;
-}
+#include "helper.h"
 
 //checks if current index is a valid operand/not an operator
 bool isOperand(char ch){
