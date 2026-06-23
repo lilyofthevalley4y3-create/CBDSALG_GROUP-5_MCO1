@@ -70,7 +70,7 @@ void infixToPost(Node* head, Queue* postQueue, char* postfix){
                     enqueue(postQueue, popped);
                     appendToken(postfix, popped);
                 }
-                   push(&stack, token);
+                push(&stack, token);
 			}
 		}
 	}
