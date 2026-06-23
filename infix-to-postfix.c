@@ -9,7 +9,7 @@ void infixToPost(Node* head, Queue* postQueue, char* postfix){
 	char multiToken[MAX] = ""; //current digits for operands only
 	char popped[4]; //popped digits
 	char curr, next; //for multi-char operands
-
+	bool rightassociative;
 	while(head != NULL){
 		token[0] = '\0';
 
@@ -56,20 +56,13 @@ void infixToPost(Node* head, Queue* postQueue, char* postfix){
 				pop(&stack,popped); // REMOVES "("
 			} else {
 				//regular operations and operands
-				while(!stackEmpty(stack) && strcmp(top(&stack), "(") != 0 &&
-                ((strcmp(token, "^") != 0 && precedence(token) <= precedence(top(&stack))) ||
-                (strcmp(token, "^") == 0 && precedence(token) < precedence(top(&stack))))){
-                pop(&stack, popped);
-                    enqueue(postQueue, popped);
-                    appendToken(postfix, popped);
-                }
-                while(!stackEmpty(stack) && strcmp(top(&stack), "(") != 0 &&
-				((strcmp(token, "^") != 0 && precedence(token) <= precedence(top(&stack))) ||
-				(strcmp(token, "^") == 0 && precedence(token) < precedence(top(&stack))))){
-					pop(&stack, popped);
-                    enqueue(postQueue, popped);
-                    appendToken(postfix, popped);
-                }
+				rightassociative = (strcmp(token, "!") == 0); //"!" is right to left associative
+				while (!stackEmpty(stack) && strcmp(top(&stack), "(") != 0 && (( !rightassociative && precedence(token) <= precedence(top(&stack))) // For left-associative operators (+, -, *, /, %),pop operators with greater or equal precedence
+			        ||( rightassociative && precedence(token) < precedence(top(&stack))))){  // For right-associative operators (!), pop operators with greater precedence only 
+					    pop(&stack, popped); 
+					    enqueue(postQueue, popped); 
+					    appendToken(postfix, popped); 
+					}
                 push(&stack, token);
 			}
 		}
