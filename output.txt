@@ -161,20 +161,6 @@ Evaluation: 5
 
 Welcome U S E R! 
 Type QUIT to END
-Input an infix expression: Linked List: 1 0 - 3 * 2 
-Postfix: 10 3 2 * -
-
-Evaluation: 4
-
-Welcome U S E R! 
-Type QUIT to END
-Input an infix expression: Linked List: ( 1 0 - 3 ) * 2 
-Postfix: 10 3 - 2 *
-
-Evaluation: 14
-
-Welcome U S E R! 
-Type QUIT to END
 Input an infix expression: Linked List: 4 < 2 | | 6 > 1 
 Postfix: 4 2 < 6 || 1 >
 
@@ -319,6 +305,20 @@ Input an infix expression: Linked List: ! ( 0 )
 Postfix: 0 !
 
 Evaluation: 1
+
+Welcome U S E R! 
+Type QUIT to END
+Input an infix expression: Linked List: ! ! 1 
+Postfix: 1 ! !
+
+Evaluation: 1
+
+Welcome U S E R! 
+Type QUIT to END
+Input an infix expression: Linked List: ! ! 0 
+Postfix: 0 ! !
+
+Evaluation: 0
 
 Welcome U S E R! 
 Type QUIT to END
