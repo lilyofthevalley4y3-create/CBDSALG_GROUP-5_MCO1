@@ -52,11 +52,11 @@ int main(){
 
 			result = evaluatePost(&postQueue, &valid);
 
-			if(valid == 1){
-			printf("Evaluation: %d\n", result);
+			if(valid){
+			printf("Evaluation: %d\n\n", result);
 			}
-			else if(valid != 1)
-			printf("Division by zero error!\n");
+			else if(!valid)
+			printf("Division by zero error!\n\n");
 
 		    temp = head;
 		    while (temp != NULL) {

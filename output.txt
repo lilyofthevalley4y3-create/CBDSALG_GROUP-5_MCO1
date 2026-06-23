@@ -1,0 +1,346 @@
+Welcome U S E R! 
+Type QUIT to END
+Input an infix expression: Linked List: 1 + 1 
+Postfix: 1 1 +
+
+Evaluation: 2
+
+Welcome U S E R! 
+Type QUIT to END
+Input an infix expression: Linked List: 2 - 2 
+Postfix: 2 2 -
+
+Evaluation: 0
+
+Welcome U S E R! 
+Type QUIT to END
+Input an infix expression: Linked List: 2 * 3 
+Postfix: 2 3 *
+
+Evaluation: 6
+
+Welcome U S E R! 
+Type QUIT to END
+Input an infix expression: Linked List: 4 ^ 3 
+Postfix: 4 3 ^
+
+Evaluation: 64
+
+Welcome U S E R! 
+Type QUIT to END
+Input an infix expression: Linked List: 5 * 5 
+Postfix: 5 5 *
+
+Evaluation: 25
+
+Welcome U S E R! 
+Type QUIT to END
+Input an infix expression: Linked List: 1 2 / 0 
+Postfix: 12 0 /
+
+Division by zero error!
+
+Welcome U S E R! 
+Type QUIT to END
+Input an infix expression: Linked List: ! ( 1 & & 0 ) 
+Postfix: 1 0 && !
+
+Evaluation: 1
+
+Welcome U S E R! 
+Type QUIT to END
+Input an infix expression: Linked List: 1 | | 0 
+Postfix: 1 0 ||
+
+Evaluation: 1
+
+Welcome U S E R! 
+Type QUIT to END
+Input an infix expression: Linked List: 1 > 3 | | 2 > 1 
+Postfix: 1 3 > 2 || 1 >
+
+Evaluation: 0
+
+Welcome U S E R! 
+Type QUIT to END
+Input an infix expression: Linked List: 7 + 8 
+Postfix: 7 8 +
+
+Evaluation: 15
+
+Welcome U S E R! 
+Type QUIT to END
+Input an infix expression: Linked List: 1 5 - 9 
+Postfix: 15 9 -
+
+Evaluation: 6
+
+Welcome U S E R! 
+Type QUIT to END
+Input an infix expression: Linked List: 6 * 7 
+Postfix: 6 7 *
+
+Evaluation: 42
+
+Welcome U S E R! 
+Type QUIT to END
+Input an infix expression: Linked List: 8 1 / 9 
+Postfix: 81 9 /
+
+Evaluation: 9
+
+Welcome U S E R! 
+Type QUIT to END
+Input an infix expression: Linked List: 1 0 % 3 
+Postfix: 10 3 %
+
+Evaluation: 1
+
+Welcome U S E R! 
+Type QUIT to END
+Input an infix expression: Linked List: 3 < 5 
+Postfix: 3 5 <
+
+Evaluation: 1
+
+Welcome U S E R! 
+Type QUIT to END
+Input an infix expression: Linked List: 8 > = 8 
+Postfix: 8 8 >=
+
+Evaluation: 1
+
+Welcome U S E R! 
+Type QUIT to END
+Input an infix expression: Linked List: 9 ! = 4 
+Postfix: 9 4 !=
+
+Evaluation: 1
+
+Welcome U S E R! 
+Type QUIT to END
+Input an infix expression: Linked List: 0 & & 1 
+Postfix: 0 1 &&
+
+Evaluation: 0
+
+Welcome U S E R! 
+Type QUIT to END
+Input an infix expression: Linked List: 1 & & 1 
+Postfix: 1 1 &&
+
+Evaluation: 1
+
+Welcome U S E R! 
+Type QUIT to END
+Input an infix expression: Linked List: 0 | | 0 
+Postfix: 0 0 ||
+
+Evaluation: 0
+
+Welcome U S E R! 
+Type QUIT to END
+Input an infix expression: Linked List: ! ( 0 | | 1 ) 
+Postfix: 0 1 || !
+
+Evaluation: 0
+
+Welcome U S E R! 
+Type QUIT to END
+Input an infix expression: Linked List: 1 8 / ( 3 + 3 ) 
+Postfix: 18 3 3 + /
+
+Evaluation: 3
+
+Welcome U S E R! 
+Type QUIT to END
+Input an infix expression: Linked List: 7 % 4 + 2 
+Postfix: 7 4 % 2 +
+
+Evaluation: 5
+
+Welcome U S E R! 
+Type QUIT to END
+Input an infix expression: Linked List: 1 0 - 3 * 2 
+Postfix: 10 3 2 * -
+
+Evaluation: 4
+
+Welcome U S E R! 
+Type QUIT to END
+Input an infix expression: Linked List: ( 1 0 - 3 ) * 2 
+Postfix: 10 3 - 2 *
+
+Evaluation: 14
+
+Welcome U S E R! 
+Type QUIT to END
+Input an infix expression: Linked List: 4 < 2 | | 6 > 1 
+Postfix: 4 2 < 6 || 1 >
+
+Evaluation: 0
+
+Welcome U S E R! 
+Type QUIT to END
+Input an infix expression: Linked List: 5 = = 5 & & 3 < 1 
+Postfix: 5 5 == 3 && 1 <
+
+Evaluation: 0
+
+Welcome U S E R! 
+Type QUIT to END
+Input an infix expression: Linked List: ! ( 4 > = 2 ) 
+Postfix: 4 2 >= !
+
+Evaluation: 0
+
+Welcome U S E R! 
+Type QUIT to END
+Input an infix expression: Linked List: 2 0 / 5 + 7 
+Postfix: 20 5 / 7 +
+
+Evaluation: 11
+
+Welcome U S E R! 
+Type QUIT to END
+Input an infix expression: Linked List: 9 * 9 - 1 0 
+Postfix: 9 9 * 10 -
+
+Evaluation: 71
+
+Welcome U S E R! 
+Type QUIT to END
+Input an infix expression: Linked List: 1 0 0 / ( 5 * 4 ) 
+Postfix: 100 5 4 * /
+
+Evaluation: 5
+
+Welcome U S E R! 
+Type QUIT to END
+Input an infix expression: Linked List: 2 + 3 * 4 
+Postfix: 2 3 4 * +
+
+Evaluation: 14
+
+Welcome U S E R! 
+Type QUIT to END
+Input an infix expression: Linked List: ( 2 + 3 ) * 4 
+Postfix: 2 3 + 4 *
+
+Evaluation: 20
+
+Welcome U S E R! 
+Type QUIT to END
+Input an infix expression: Linked List: 1 5 % 4 
+Postfix: 15 4 %
+
+Evaluation: 3
+
+Welcome U S E R! 
+Type QUIT to END
+Input an infix expression: Linked List: 8 < = 7 
+Postfix: 8 7 <=
+
+Evaluation: 0
+
+Welcome U S E R! 
+Type QUIT to END
+Input an infix expression: Linked List: 1 2 > 6 & & 5 < 9 
+Postfix: 12 6 > 5 && 9 <
+
+Evaluation: 1
+
+Welcome U S E R! 
+Type QUIT to END
+Input an infix expression: Linked List: 0 | | 1 & & 0 
+Postfix: 0 1 || 0 &&
+
+Evaluation: 0
+
+Welcome U S E R! 
+Type QUIT to END
+Input an infix expression: Linked List: ! ( 1 & & 1 ) 
+Postfix: 1 1 && !
+
+Evaluation: 0
+
+Welcome U S E R! 
+Type QUIT to END
+Input an infix expression: Linked List: 2 5 - 1 0 + 3 
+Postfix: 25 10 - 3 +
+
+Evaluation: 18
+
+Welcome U S E R! 
+Type QUIT to END
+Input an infix expression: Linked List: 6 * 6 / 3 
+Postfix: 6 6 * 3 /
+
+Evaluation: 12
+
+Welcome U S E R! 
+Type QUIT to END
+Input an infix expression: Linked List: 1 4 % 5 * 2 
+Postfix: 14 5 % 2 *
+
+Evaluation: 8
+
+Welcome U S E R! 
+Type QUIT to END
+Input an infix expression: Linked List: 5 0 / ( 2 + 3 ) 
+Postfix: 50 2 3 + /
+
+Evaluation: 10
+
+Welcome U S E R! 
+Type QUIT to END
+Input an infix expression: Linked List: 3 * 3 * 3 
+Postfix: 3 3 * 3 *
+
+Evaluation: 27
+
+Welcome U S E R! 
+Type QUIT to END
+Input an infix expression: Linked List: 7 + 7 = = 1 4 
+Postfix: 7 7 + 14 ==
+
+Evaluation: 1
+
+Welcome U S E R! 
+Type QUIT to END
+Input an infix expression: Linked List: 9 < 4 | | 8 > 2 
+Postfix: 9 4 < 8 || 2 >
+
+Evaluation: 0
+
+Welcome U S E R! 
+Type QUIT to END
+Input an infix expression: Linked List: ! ( 0 ) 
+Postfix: 0 !
+
+Evaluation: 1
+
+Welcome U S E R! 
+Type QUIT to END
+Input an infix expression: Linked List: 1 & & 0 | | 1 
+Postfix: 1 0 && 1 ||
+
+Evaluation: 1
+
+Welcome U S E R! 
+Type QUIT to END
+Input an infix expression: Linked List: ( 8 - 3 ) * ( 2 + 1 ) 
+Postfix: 8 3 - 2 1 + *
+
+Evaluation: 15
+
+Welcome U S E R! 
+Type QUIT to END
+Input an infix expression: Linked List: ( 1 - 1 | | 2 ^ 0 ) & & ( 5 % 2 > 0 ) & & ( 6 < = 4 ) 
+Postfix: 1 1 - 2 0 ^ || 5 2 % 0 > && 6 4 <= &&
+
+Evaluation: 0
+
+Welcome U S E R! 
+Type QUIT to END
+Input an infix expression: 
