@@ -57,16 +57,23 @@ void infixToPost(Node* head, Queue* postQueue, char* postfix){
 			} else {
 				//regular operations and operands
 				while(!stackEmpty(stack) && strcmp(top(&stack), "(") != 0 &&
+                ((strcmp(token, "^") != 0 && precedence(token) <= precedence(top(&stack))) ||
+                (strcmp(token, "^") == 0 && precedence(token) < precedence(top(&stack))))){
+                pop(&stack, popped);
+                    enqueue(postQueue, popped);
+                    appendToken(postfix, popped);
+                }
+                while(!stackEmpty(stack) && strcmp(top(&stack), "(") != 0 &&
 				((strcmp(token, "^") != 0 && precedence(token) <= precedence(top(&stack))) ||
 				(strcmp(token, "^") == 0 && precedence(token) < precedence(top(&stack))))){
 					pop(&stack, popped);
                     enqueue(postQueue, popped);
                     appendToken(postfix, popped);
-                   }
+                }
                    push(&stack, token);
-				}
 			}
 		}
+	}
 
 	//final popping
 	while(!stackEmpty(stack)){
